@@ -3,12 +3,37 @@ defmodule PhysicsTest do
   doctest Physics
 
   test "escape velocity of earth is correct" do
-    ev = Physics.Rocketry.escape_velocity(:earth) |> IO.inspect
-    assert ev == 0
+    ev = Physics.Rocketry.escape_velocity(:earth)
+    assert ev == 11.2 #what should this value be?
+  end
+
+  test "escape velocity of mars is correct" do
+    ev = Physics.Rocketry.escape_velocity(:earth)
+    assert ev == 5.0 #what should this value be?
+  end
+
+  test "escape velocity of moon is correct" do
+    ev = Physics.Rocketry.escape_velocity(:moon)
+    assert ev == 2.4
   end
 
   test "escape velocity of planet X is correct" do
-    planet_x = %{mass: 4.0e22, radius: 6.21e6}
-    ev = planet_x |> Physics.Rocketry.escape_velocity |> IO.velocity
+    ev = %{mass: 4.0e22, radius: 6.21e6} |> Physics.Rocketry.escape_velocity
+    assert ev == 0.9
+  end
+
+  test "Converter on works" do
+    ls = Converter.to_light_seconds({:miles, 1000}, precision: 5)
+    assert ls == 0.00537
+  end
+
+  test "ConverterTwo works" do
+    ls = ConverterTwo.to_light_seconds({:miles, 1000}, precision: 5)
+    assert ls == 0.00537
+  end
+
+  test " ConverterTwo works with default values" do
+    ls = ConverterTwo.to_light_seconds({:miles, 1000})
+    assert ls == 0.00537
   end
 end
